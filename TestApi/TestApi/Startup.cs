@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
@@ -32,22 +27,22 @@ namespace TestApi
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "Repro Api", Version = "v1" });
 
         // uncomment to see how collectionFormat fixes things
-        //c.MapType<IEnumerable<int>>(() =>
-        //{
-        //  var schema = new OpenApiSchema
-        //  {
-        //    UniqueItems = false,
-        //    Type = "array",
-        //    Items = new OpenApiSchema
-        //    {
-        //      Type = "integer",
-        //      Format = "int32"
-        //    }
-        //  };
+        c.MapType<IEnumerable<int>>(() =>
+        {
+          var schema = new OpenApiSchema
+          {
+            UniqueItems = false,
+            Type = "array",
+            Items = new OpenApiSchema
+            {
+              Type = "integer",
+              Format = "int32"
+            }
+          };
 
-        //  schema.Extensions.Add("collectionFormat", new OpenApiString("multi"));
-        //  return schema;
-        //});
+          schema.Extensions.Add("collectionFormat", new OpenApiString("multi"));
+          return schema;
+        });
       });
     }
 

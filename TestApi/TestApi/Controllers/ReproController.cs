@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestApi.Controllers
 {
@@ -7,7 +7,7 @@ namespace TestApi.Controllers
   public class ReproController : ControllerBase
   {
     [HttpGet]
-    public IActionResult GetByIdList([FromQuery]IEnumerable<int> filterId)
+    public IActionResult GetByIdList([FromQuery] IEnumerable<int> filterId)
     {
       if (!ModelState.IsValid)
       {
